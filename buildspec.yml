@@ -1,19 +1,25 @@
 version: 0.2
 
+env:
+  variables:
+    IMAGE_NAME: gabriellucasdev/boa-massa-frontend
+    IMAGE_TAG: latest
+
 phases:
+  pre_build:
+    commands:
+      - echo "Fazendo login no Docker Hub..."
+      - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
   build:
     commands:
-      - echo "Gerando .env para build local"
-      - |
-        cat <<EOF > .env
-        NODE_ENV=production
-        NEXT_PUBLIC_API_URL=$API_URL
-        EOF
-      - echo ".env criado"
+      - echo "Construindo a imagem Docker..."
+      - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+  post_build:
+    commands:
+      - echo "Fazendo push da imagem para o Docker Hub..."
+      - docker push $IMAGE_NAME:$IMAGE_TAG
+      - echo "Build e push concluídos com sucesso!"
 
 artifacts:
   files:
-    - '**/*'
-    - '!.git/**'
-    - '!node_modules/**'
-    - '!.next/cache/**'
+    - Dockerrun.aws.json
