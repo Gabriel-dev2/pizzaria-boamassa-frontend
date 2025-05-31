@@ -13,7 +13,8 @@ phases:
   build:
     commands:
       - echo "Construindo a imagem Docker..."
-      - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+      - echo "Adicionando variavel NEXT_PUBLIC_API_URL=$API_URL..."
+      - docker build --build-arg NEXT_PUBLIC_API_URL=$API_URL -t $IMAGE_NAME:$IMAGE_TAG 
   post_build:
     commands:
       - echo "Fazendo push da imagem para o Docker Hub..."
