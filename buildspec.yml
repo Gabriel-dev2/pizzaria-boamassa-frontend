@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    IMAGE_NAME: gabriellucasdev/boa-massa-frontend
+    IMAGE_NAME: $IMAGE_NAME_MASTER
     IMAGE_TAG: latest
 
 phases:
