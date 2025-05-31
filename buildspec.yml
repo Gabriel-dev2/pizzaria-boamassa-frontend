@@ -15,9 +15,8 @@ phases:
       - echo "Listando arquivos do diretório:"
       - ls -la
 
-  artifacts: 
-    type: zip
-    files: 
-
-      - '**/*' 
+artifacts: 
+  type: zip
+  files:
+    - '**/*' 
   
