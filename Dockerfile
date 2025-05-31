@@ -1,15 +1,22 @@
-FROM node:18-slim
+# Etapa de build
+FROM node:18-alpine AS builder
 
-RUN mkdir -p /app 
+WORKDIR /app
 
-WORKDIR /app 
+COPY package*.json ./
+RUN npm install
 
-COPY . . 
+COPY . .
+RUN npm run build
 
-RUN npm install 
+# Etapa de produção
+FROM node:18-alpine
 
-RUN npm run build 
+WORKDIR /app
 
-EXPOSE 3000 
+COPY --from=builder /app ./
+RUN npm prune --production
 
-CMD ["npm", "start"] 
+EXPOSE 3000
+
+CMD ["npm", "start"]

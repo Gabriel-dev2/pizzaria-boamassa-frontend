@@ -1,22 +1,19 @@
 version: 0.2
 
 phases:
-
   build:
     commands:
-      - echo "Criando o arquivo .env..."
+      - echo "Gerando .env para build local"
       - |
         cat <<EOF > .env
-        # Variáveis de ambiente da aplicação Next.js
         NODE_ENV=production
         NEXT_PUBLIC_API_URL=$API_URL
         EOF
-      - echo "Arquivo .env criado com sucesso!"
-      - echo "Listando arquivos do diretório:"
-      - ls -la
+      - echo ".env criado"
 
-artifacts: 
-  type: zip
+artifacts:
   files:
-    - '**/*' 
-  
+    - '**/*'
+    - '!.git/**'
+    - '!node_modules/**'
+    - '!.next/cache/**'
