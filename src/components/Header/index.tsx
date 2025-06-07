@@ -45,6 +45,31 @@ export function Header() {
                             </>
                         )
                     }
+
+                    {user?.perfil === 'CLIENT' && (
+                        <>
+                        <Link href="/menu" legacyBehavior>
+                            <a>Cardápio</a>
+                        </Link>
+                        </>
+                    )}
+
+                    {user?.perfil === 'WAITER' && (
+                        <>
+                        <Link href="/tables" legacyBehavior>
+                            <a>Mesas</a>
+                        </Link>
+                        <Link href="/relatorio" legacyBehavior>
+                            <a>Relatório</a>
+                        </Link>
+                        <Link href="/categories" legacyBehavior>
+                            <a>Categorias</a>
+                        </Link>
+                        <Link href="/products" legacyBehavior>
+                            <a>Produtos</a>
+                        </Link>
+                        </>
+                    )}
                     <button onClick={signOut}>
                         <FiLogOut
                             size={25} />
