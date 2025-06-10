@@ -60,7 +60,13 @@ export default function Order({ tableList, productList, userList }: OrderProps) 
     }
 
     async function handleChangeProducts(event) {
+        const selectedIndex = event.target.value;
         setProductSelected(event.target.value);
+
+        const selectedProduct = products[selectedIndex];
+        if (selectedProduct) {
+            setAmount(String(selectedProduct.price));
+        }
     }
 
     function clearFields() {
