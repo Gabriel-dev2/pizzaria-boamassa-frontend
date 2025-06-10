@@ -49,7 +49,7 @@ export default function Relatorio({ userList, tableList }: PaymentProps) {
     const loadPdfMake = async () => {
       const pdfMake = (await import('pdfmake/build/pdfmake')).default;
       const pdfFonts = await import('pdfmake/build/vfs_fonts');
-      pdfMake.vfs = pdfFonts.pdfMake.vfs;
+      pdfMake.vfs = pdfFonts.vfs;
       setPdfMakeInstance(pdfMake);
     };
 

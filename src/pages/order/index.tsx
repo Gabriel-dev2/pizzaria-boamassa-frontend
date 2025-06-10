@@ -56,7 +56,11 @@ export default function Order({ tableList, productList, userList }: OrderProps) 
     const [userActive, setUserActive] = useState(userList || []);
 
     async function handleChangeTable(event) {
-        setTables(event.target.value);
+        setTableSelected(event.target.value);
+    }
+
+    async function handleChangeProducts(event) {
+        setProductSelected(event.target.value);
     }
 
     function clearFields() {
@@ -64,6 +68,7 @@ export default function Order({ tableList, productList, userList }: OrderProps) 
         setName('');
         setAmount('');
         setUserSelected(null);
+        setProductSelected(null);
     }
 
     async function handleOrder(event: FormEvent) {
@@ -77,6 +82,14 @@ export default function Order({ tableList, productList, userList }: OrderProps) 
                 table_id: tables[tableSelected].id,
                 amount: amount
             });
+
+            const amountProduct = Number(products[productSelected].price);
+
+            const responseProductItemAdded = await apiClient.post('/order/add', {
+                order_id: response.data.id,
+                product_id: products[productSelected].id,
+                amount: amountProduct
+            })
 
             toast.success('Pedido ' + response.data.id + ' cadastrada com sucesso!', {
                 theme: "dark"
@@ -124,6 +137,21 @@ export default function Order({ tableList, productList, userList }: OrderProps) 
                             placeholder="Digite o nome"
                             maxLength={20}
                         />
+                        <Select
+                            onChange={handleChangeProducts}
+                            value={productSelected}>
+                                {
+                                    products.map((item, index) => {
+                                        return (
+                                            <option
+                                                key={item.id}
+                                                value={index}>
+                                                {item.name}
+                                            </option>
+                                        )
+                                    })
+                                }
+                        </Select>
                         <Input
                             value={amount}
                             onChange={(event) => setAmount(event.target.value.replace(/[^0-9]/g, ""))}
