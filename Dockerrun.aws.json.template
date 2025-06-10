@@ -16,7 +16,7 @@
     },
     {
       "Name": "NEXT_PUBLIC_API_URL",
-      "Value": "http://pizzaria-boamassa-dev-api.us-west-2.elasticbeanstalk.com"
+      "Value": "{{API_URL}}"
     }
   ]
 }
