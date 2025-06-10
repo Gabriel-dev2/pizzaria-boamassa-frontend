@@ -19,6 +19,9 @@ phases:
     commands:
       - echo "Fazendo push da imagem para o Docker Hub..."
       - docker push $IMAGE_NAME_MASTER:$IMAGE_TAG
+      - echo "Gerando Dockerrun.aws.json dinamicamente..."
+      - FULL_IMAGE_NAME="$IMAGE_NAME_MASTER:$IMAGE_TAG"
+      - sed -e "s|{{IMAGE_NAME}}|$FULL_IMAGE_NAME|g" -e "s|{{API_URL}}|$API_URL|g" Dockerrun.aws.json.template > Dockerrun.aws.json
       - echo "Build e push concluídos com sucesso!"
 
 artifacts:

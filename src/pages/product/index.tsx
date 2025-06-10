@@ -94,7 +94,7 @@ export default function Product({ categoryList }: CategoryProps) {
     return (
         <>
             <Head>
-                <title>Cadastrar Produto - Uni Pizza</title>
+                <title>Cadastrar Produto - Pizzaria Boa Massa</title>
             </Head>
             <div>
                 <Header />

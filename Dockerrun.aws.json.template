@@ -1,7 +1,7 @@
 {
   "AWSEBDockerrunVersion": "1",
   "Image": {
-    "Name": "gabriellucasdev/boa-massa-frontend:latest",
+    "Name": "{{IMAGE_NAME}}",
     "Update": "true"
   },
   "Ports": [
@@ -16,7 +16,7 @@
     },
     {
       "Name": "NEXT_PUBLIC_API_URL",
-      "Value": "http://pizzaria-boamassa-dev-api.us-west-2.elasticbeanstalk.com"
+      "Value": "{{API_URL}}"
     }
   ]
 }

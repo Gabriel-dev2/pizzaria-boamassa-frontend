@@ -7,6 +7,8 @@ import { signOut } from "../contexts/AuthContext";
 export function setupAPIClient(ctx = undefined) {
     let cookies = parseCookies(ctx);
 
+    console.log(`URL da api: ${process.env.NEXT_PUBLIC_API_URL}`);
+
     const api = axios.create({
         baseURL: process.env.NEXT_PUBLIC_API_URL,
         headers: {

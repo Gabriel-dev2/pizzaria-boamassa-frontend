@@ -3,11 +3,12 @@ import { canSSRAuth } from '../../utils/canSSRAuth';
 import Head from 'next/head';
 import styles from './styles.module.scss';
 import { Header } from '../../components/Header';
-import { FiRefreshCcw } from 'react-icons/fi';
+import { FiRefreshCcw, FiPlus } from 'react-icons/fi';
 import { setupAPIClient } from '../../services/api';
 import { ModalOrder } from '../../components/Modal/ModalOrder';
 import Modal from 'react-modal';
 import { ButtonRefresh } from '../../components/ui/Button';
+import Link from "next/link";
 import { toast } from 'react-toastify';
 import { Footer } from '../../components/Footer';
 
@@ -126,7 +127,7 @@ export default function Dashboard({ orders }: HomeProps) {
     return (
         <>
             <Head>
-                <title>Painel - Sujeito Pizzaria</title>
+                <title>Painel - Pizzaria Boa Massa</title>
             </Head>
             <div>
                 <Header />
@@ -140,6 +141,13 @@ export default function Dashboard({ orders }: HomeProps) {
                                 size={25} />
                         </ButtonRefresh>
                     </div>
+                    <button
+                            title="Cadastrar Pedido"
+                            className={styles.button}>
+                            <Link href="/order" legacyBehavior>
+                                <a><FiPlus size={50} /></a>
+                            </Link>
+                    </button>
                     <article className={styles.listOreders}>
                         {
                             orderList.length === 0 && (

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import styles from './styles.module.scss';
 import { canSSRAuth } from '../../utils/canSSRAuth';
 import { setupAPIClient } from '../../services/api';
@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { Footer } from '../../components/Footer';
 import { SwitchTable, SwitchTableDisable } from '../../components/ui/Switch';
 import Link from 'next/link';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export interface TableItemProps {
     id: string;
@@ -26,6 +27,7 @@ interface TableProps {
 export default function Tables({ tableList }: TableProps) {
     const [tables, setTables] = useState(tableList || []);
     const [search, setSearch] = useState(true);
+    const { user } = useContext(AuthContext);
 
     setTimeout(async function () {
         setSearch(!search);
@@ -75,13 +77,15 @@ export default function Tables({ tableList }: TableProps) {
                 <main className={styles.container}>
                     <div className={styles.containerHead}>
                         <h1>Mesas</h1>
-                        <button
+                        {user?.perfil !== 'CLIENT' && (
+                            <button
                             title="Adicionar mesas"
                             className={styles.button}>
                             <Link href="/table" legacyBehavior>
                                 <a><FiPlus size={50} /></a>
                             </Link>
                         </button>
+                        )}
                     </div>
                     {
                         tables.length === 0 && (
